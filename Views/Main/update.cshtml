@@ -1,0 +1,118 @@
+@model PrelimCoop.Entities.ClientsInfoTb;
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Update Client Information</h2>
+
+                    <form asp-action="Update" method="post">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row g-3">
+                            <div class="col">
+                                <label asp-for="UserType" class="form-label">User Type</label>
+                                <input asp-for="UserType" class="form-control" />
+                                <span asp-validation-for="UserType" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <label asp-for="FullName" class="form-label">Full Name</label>
+                                <input asp-for="FullName" class="form-control" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col">
+                                <label asp-for="LastName" class="form-label">Last Name</label>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <label asp-for="Address" class="form-label">Address</label>
+                                <input asp-for="Address" class="form-control" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col">
+                                <label asp-for="ZipCode" class="form-label">Zip Code</label>
+                                <input asp-for="ZipCode" class="form-control" />
+                                <span asp-validation-for="ZipCode" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <label asp-for="Birthday" class="form-label">Birthday</label>
+                                <input asp-for="Birthday" id="birthdayInput" type="date" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col">
+                                <label asp-for="Age" class="form-label">Age</label>
+                                <input asp-for="Age" id="ageInput" class="form-control" readonly>
+                            </div>
+                            <div class="col">
+                                <label asp-for="NameOfFather" class="form-label">Name of Father</label>
+                                <input asp-for="NameOfFather" class="form-control" />
+                                <span asp-validation-for="NameOfFather" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col">
+                                <label asp-for="NameOfMother" class="form-label">Name of Mother</label>
+                                <input asp-for="NameOfMother" class="form-control" />
+                                <span asp-validation-for="NameOfMother" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <label asp-for="CivilStatus" class="form-label">Civil Status</label>
+                                <input asp-for="CivilStatus" class="form-control" />
+                                <span asp-validation-for="CivilStatus" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Religion" class="form-label">Religion</label>
+                            <input asp-for="Religion" class="form-control" />
+                            <span asp-validation-for="Religion" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Occupation" class="form-label">Occupation</label>
+                            <input asp-for="Occupation" class="form-control" />
+                            <span asp-validation-for="Occupation" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                           <a href="@Url.Action("Index", "Main")" class="btn btn-secondary ms-2">Back</a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function calculateAge() {
+            var currentDate = new Date();
+            var birthday = new Date(document.getElementById('birthdayInput').value);
+            var age = currentDate.getFullYear() - birthday.getFullYear();
+            if (currentDate.getMonth() < birthday.getMonth() || (currentDate.getMonth() == birthday.getMonth() && currentDate.getDate() < birthday.getDate())) {
+                age--;
+            }
+            document.getElementById('ageInput').value = age;
+        }
+
+        document.getElementById('birthdayInput').addEventListener('change', calculateAge);
+    </script>
+}

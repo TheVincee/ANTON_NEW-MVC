@@ -1,0 +1,45 @@
+@model List<PrelimCoop.Entities.LoanDb>
+
+<div class="container mt-4 p-4 border rounded shadow-sm bg-light">
+    <a class="btn btn-success mb-3" href="/loan/create">Create New</a>
+
+    <table id="loan-table" class="table table-striped table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>Client</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>No of Payment</th>
+                <th>Deduction</th>
+                <th>Date Created</th>
+                <th>Receivable Amount</th>
+                <th>Due Date</th>
+                <th>Payable Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in Model)
+            {
+                <tr>
+                    <td>@loan.ClientId</td>
+                    <td>@loan.Type</td>
+                    <td>@loan.Amount</td>
+                    <td>@loan.NoOfPayment</td>
+                    <td>@loan.Deduction</td>
+                    <td>@loan.DateCreated.ToString("yyyy-MM-dd")</td>
+                    <td>@loan.RecievableAmount</td>
+                    <td>@loan.DueDate</td>
+                    <td>@loan.PayableAmount</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-warning btn-sm" href="/Loan/edit/@loan.Id">Update</a>
+                            <a class="btn btn-danger btn-sm" href="/Loan/delete/@loan.Id">Delete</a>
+                            <a class="btn btn-primary btn-sm" href="/payments/viewpayments/@loan.ClientId">View Payments</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
